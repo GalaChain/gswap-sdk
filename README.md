@@ -8,11 +8,11 @@ A TypeScript SDK for interacting with the gSwap decentralized exchange on GalaCh
 ## Example SDK Usage
 
 ```bash
-npm install @galachain/gswap-sdk
+npm install @gala-chain/gswap-sdk
 ```
 
 ```typescript
-import { GSwap, PrivateKeySigner } from '@galachain/gswap-sdk';
+import { GSwap, PrivateKeySigner } from '@gala-chain/gswap-sdk';
 
 const gSwap = new GSwap({
   signer: new PrivateKeySigner('your-private-key'),

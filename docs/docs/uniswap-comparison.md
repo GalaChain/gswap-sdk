@@ -212,7 +212,7 @@ console.log(`✅  Confirmed in block ${receipt.blockNumber}`);
 #### gSwap
 
 ```typescript
-import { GSwap, FEE_TIER, PrivateKeySigner } from '@galachain/gswap-sdk';
+import { GSwap, FEE_TIER, PrivateKeySigner } from '@gala-chain/gswap-sdk';
 
 const WALLET_ADDRESS = 'eth|123...abc'; // Your wallet address
 const signer = new PrivateKeySigner('your-private-key-here');

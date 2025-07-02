@@ -1,4 +1,4 @@
-import { GSwap } from '@galachain/gswap-sdk';
+import { GSwap } from '@gala-chain/gswap-sdk';
 
 export async function getPoolData(inToken: string, outToken: string, fee: number) {
   const gSwap = new GSwap({

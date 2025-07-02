@@ -49,7 +49,7 @@ The protocol fee is charged on the input amount (the amount you are selling). Fo
 Different fee tiers often have different liquidity depths and price impact:
 
 ```typescript
-import { FEE_TIER } from '@galachain/gswap-sdk';
+import { FEE_TIER } from '@gala-chain/gswap-sdk';
 
 // First, check what the SDK recommends automatically
 const autoQuote = await gSwap.quoting.quoteExactInput(

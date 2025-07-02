@@ -148,7 +148,7 @@ export class GSwap {
     this.dexBackendBaseUrl = options?.dexBackendBaseUrl ?? 'https://dex-backend-dev1.defi.gala.com'; // TODO
     this.signer = options?.signer;
     this.transactionWaitTimeoutMs = options?.transactionWaitTimeoutMs ?? 300_000; // 5 minutes
-    this.httpRequestor = options?.httpRequestor ?? fetch;
+    this.httpRequestor = options?.httpRequestor ?? fetch.bind(globalThis);
 
     this.httpClient = new HttpClient(this.httpRequestor);
 

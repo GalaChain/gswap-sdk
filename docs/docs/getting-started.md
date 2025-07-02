@@ -11,7 +11,7 @@ This guide will help you get started with integrating gSwap into your applicatio
 Install the gSwap SDK using npm:
 
 ```bash
-npm install @galachain/gswap-sdk
+npm install @gala-chain/gswap-sdk
 ```
 
 ## Node.js Setup
@@ -19,7 +19,7 @@ npm install @galachain/gswap-sdk
 For server-side applications, use the `PrivateKeySigner` with a GalaChain private key:
 
 ```typescript
-import { GSwap, PrivateKeySigner } from '@galachain/gswap-sdk';
+import { GSwap, PrivateKeySigner } from '@gala-chain/gswap-sdk';
 
 const signer = new PrivateKeySigner('your-private-key-here');
 
@@ -80,7 +80,7 @@ Here's a complete HTML page that demonstrates wallet connection and token swappi
       import {
         GSwap,
         GalaWalletSigner,
-      } from 'https://unpkg.com/@galachain/gswap-sdk@1/dist/browser/index.js';
+      } from 'https://unpkg.com/@gala-chain/gswap-sdk@1/dist/browser/index.js';
 
       window.connectAndSwap = connectAndSwap;
 

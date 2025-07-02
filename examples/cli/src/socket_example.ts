@@ -1,4 +1,4 @@
-import { BundlerResponse, GSwap } from '@galachain/gswap-sdk';
+import { BundlerResponse, GSwap } from '@gala-chain/gswap-sdk';
 import 'dotenv/config';
 
 export async function socketExample() {

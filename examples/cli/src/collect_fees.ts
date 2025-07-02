@@ -1,4 +1,4 @@
-import { GSwap, PrivateKeySigner } from '@galachain/gswap-sdk';
+import { GSwap, PrivateKeySigner } from '@gala-chain/gswap-sdk';
 import 'dotenv/config';
 import { getPositionById } from './get_position_by_id.js';
 

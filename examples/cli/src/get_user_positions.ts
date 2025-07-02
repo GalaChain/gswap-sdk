@@ -1,4 +1,4 @@
-import { GetUserPositionsResult, GSwap } from '@galachain/gswap-sdk';
+import { GetUserPositionsResult, GSwap } from '@gala-chain/gswap-sdk';
 
 export async function getUserPositions(address: string) {
   const gSwap = new GSwap({

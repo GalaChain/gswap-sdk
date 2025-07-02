@@ -3,7 +3,7 @@
 import 'dotenv/config';
 // End must come first
 
-import { GSwap } from '@galachain/gswap-sdk';
+import { GSwap } from '@gala-chain/gswap-sdk';
 import { serializeError } from 'serialize-error';
 import {
   addLiquidityByPrice,

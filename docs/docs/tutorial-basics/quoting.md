@@ -17,7 +17,7 @@ Make sure you've completed the [Getting Started](../getting-started.md) guide an
 First, let's instantiate the SDK. Since quotes are read-only operations, we don't need a signer:
 
 ```typescript
-import { GSwap, FEE_TIER } from '@galachain/gswap-sdk';
+import { GSwap, FEE_TIER } from '@gala-chain/gswap-sdk';
 
 // Create GSwap instance for quotes (no signer needed)
 const gSwap = new GSwap();

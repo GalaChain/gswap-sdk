@@ -1,5 +1,5 @@
 {
-  "name": "@galachain/gswap-sdk",
+  "name": "@gala-chain/gswap-sdk",
   "version": "0.0.0-preview",
   "description": "A source development kit for interacting with GSwap.",
   "main": "dist/index.js",

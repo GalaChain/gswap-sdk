@@ -15,7 +15,7 @@ Make sure you've completed the [Getting Started](../getting-started.md) guide an
 GSwap uses a shared global WebSocket connection for all instances. Call `GSwap.events.connectEventSocket()` during application initialization:
 
 ```typescript
-import { GSwap } from '@galachain/gswap-sdk';
+import { GSwap } from '@gala-chain/gswap-sdk';
 
 // Application initialization
 await GSwap.events.connectEventSocket();

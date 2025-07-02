@@ -1,4 +1,4 @@
-import { GalaWalletSigner } from '@galachain/gswap-sdk';
+import { GalaWalletSigner } from '@gala-chain/gswap-sdk';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { WalletContext } from './WalletContext.tsx';

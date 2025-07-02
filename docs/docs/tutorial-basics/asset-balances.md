@@ -15,7 +15,7 @@ Make sure you've completed the [Getting Started](../getting-started.md) guide an
 Use the `getUserAssets()` method to retrieve all tokens owned by a wallet:
 
 ```typescript
-import { GSwap } from '@galachain/gswap-sdk';
+import { GSwap } from '@gala-chain/gswap-sdk';
 
 const gSwap = new GSwap();
 

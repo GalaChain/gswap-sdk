@@ -14,7 +14,7 @@ This guide explains how to manage liquidity positions on gSwap, including creati
 The examples in this article assume you have a gSwap instance set up with a signer and have connected to the event socket for transaction monitoring:
 
 ```typescript
-import { GSwap, FEE_TIER } from '@galachain/gswap-sdk';
+import { GSwap, FEE_TIER } from '@gala-chain/gswap-sdk';
 import BigNumber from 'bignumber.js';
 
 // Connect globally for transaction monitoring
@@ -53,7 +53,7 @@ For example, when creating a GALA/USDC position:
 Use `gSwap.positions.addLiquidityByPrice()` to create a position with a specific price range:
 
 ```typescript
-import { GSwap, FEE_TIER, PriceIn } from '@galachain/gswap-sdk';
+import { GSwap, FEE_TIER, PriceIn } from '@gala-chain/gswap-sdk';
 import BigNumber from 'bignumber.js';
 
 const minPrice: PriceIn = '0.5' as PriceIn; // Position active from 0.5 USDC per $GALA

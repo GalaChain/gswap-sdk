@@ -1,6 +1,6 @@
 # gSwap DEX Frontend Example
 
-A minimal example of how to build a decentralized exchange (DEX) frontend using the gSwap SDK and Gala Wallet. This React application demonstrates the core functionality needed to create a DEX interface.
+A minimal example of how to build a decentralized exchange (DEX) swapping frontend using the gSwap SDK and Gala Wallet. This React application demonstrates the core functionality needed to create a DEX swapping interface.
 
 IMPORTANT: Wallet connection will only work if you run this with SSL. Otherwise Gala Wallet will not inject into the page.
 

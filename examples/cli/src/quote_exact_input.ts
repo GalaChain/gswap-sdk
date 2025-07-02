@@ -3,7 +3,7 @@ import {
   GSwap,
   type GalaChainTokenClassKey,
   type NumericAmount,
-} from '@galachain/gswap-sdk';
+} from '@gala-chain/gswap-sdk';
 
 export async function quoteExactInput(
   tokenIn: GalaChainTokenClassKey | string, // The token you are selling

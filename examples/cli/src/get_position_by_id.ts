@@ -1,4 +1,4 @@
-import { GSwap } from '@galachain/gswap-sdk';
+import { GSwap } from '@gala-chain/gswap-sdk';
 
 export async function getPositionById(address: string, positionId: string) {
   const gSwap = new GSwap({

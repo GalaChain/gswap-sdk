@@ -4,7 +4,7 @@ import {
   NumericAmount,
   PriceIn,
   PrivateKeySigner,
-} from '@galachain/gswap-sdk';
+} from '@gala-chain/gswap-sdk';
 import BigNumber from 'bignumber.js';
 import 'dotenv/config';
 

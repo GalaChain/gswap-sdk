@@ -3,7 +3,7 @@ import {
   GSwap,
   NumericAmount,
   PrivateKeySigner,
-} from '@galachain/gswap-sdk';
+} from '@gala-chain/gswap-sdk';
 
 export async function swapTokens(
   walletAddress: string,

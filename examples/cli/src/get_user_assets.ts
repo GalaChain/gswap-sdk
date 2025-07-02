@@ -1,4 +1,4 @@
-import { GSwap, type GetUserAssetsResult } from '@galachain/gswap-sdk';
+import { GSwap, type GetUserAssetsResult } from '@gala-chain/gswap-sdk';
 
 /**
  * Get all asset balances for a specific wallet address.

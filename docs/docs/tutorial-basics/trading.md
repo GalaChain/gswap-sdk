@@ -22,7 +22,7 @@ Before executing swaps, you should:
 Unlike quoting, which is read-only, swaps require a signer to authenticate transactions. Waiting for your transactions to complete also requires establishing a connection to the event socket.
 
 ```typescript
-import { GSwap, FEE_TIER, PrivateKeySigner } from '@galachain/gswap-sdk';
+import { GSwap, FEE_TIER, PrivateKeySigner } from '@gala-chain/gswap-sdk';
 
 // Connect to the event socket (once globally)
 await GSwap.events.connectEventSocket();
