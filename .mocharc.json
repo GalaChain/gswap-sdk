@@ -1,0 +1,10 @@
+{
+  "extension": [
+    "ts"
+  ],
+  //"spec": ["test/**/*.spec.ts", "src/**/*.spec.ts"],
+  "require": [
+    "ts-node/register"
+  ],
+  "loader": "ts-node/esm"
+}

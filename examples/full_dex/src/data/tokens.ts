@@ -1,0 +1,51 @@
+export const tokens = [
+  {
+    collection: 'GALA',
+    category: 'Unit',
+    type: 'none',
+    additionalKey: 'none',
+    image: 'https://static.gala.games/images/icons/units/gala.png',
+  },
+  {
+    category: 'Unit',
+    additionalKey: 'none',
+    collection: 'SILK',
+    image: 'https://static.gala.games/spidertank/assets/image/silk.png',
+    type: 'none',
+  },
+  {
+    category: 'Unit',
+    additionalKey: 'none',
+    collection: 'Materium',
+    image: 'https://tokens.gala.games/compressed-images/logos/MTRM-icon.png',
+    type: 'none',
+  },
+  {
+    category: 'Unit',
+    additionalKey: 'none',
+    collection: 'ETIME',
+    image: 'https://static.gala.games/eternal-paradox/images/etime.png',
+    type: 'none',
+  },
+  {
+    category: 'Unit',
+    additionalKey: 'none',
+    collection: 'GUSDC',
+    image: 'https://tokens.gala.games/compressed-images/logos/USDC-icon.png',
+    type: 'none',
+  },
+  {
+    category: 'Unit',
+    additionalKey: 'none',
+    collection: 'GUSDT',
+    image: 'https://tokens.gala.games/compressed-images/logos/USDT-icon.png',
+    type: 'none',
+  },
+  {
+    category: 'Unit',
+    additionalKey: 'none',
+    collection: 'GWETH',
+    image: 'https://tokens.gala.games/compressed-images/logos/WETH-icon.png',
+    type: 'none',
+  },
+];

@@ -1,0 +1,336 @@
+.liquidity-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #1a1a1a;
+  color: white;
+  padding: 40px 20px;
+}
+
+.liquidity-container {
+  background: #2a2a2a;
+  border-radius: 16px;
+  padding: 24px;
+  width: 500px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.liquidity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #3a3a3a;
+}
+
+.liquidity-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.settings-btn:hover {
+  background-color: #3a3a3a;
+}
+
+.pair-selection {
+  margin-bottom: 24px;
+}
+
+.pair-selection h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.token-pair {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.token-selector {
+  display: flex;
+  align-items: center;
+  background: #3a3a3a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  gap: 8px;
+  transition: background-color 0.2s;
+  flex: 1;
+}
+
+.token-selector:hover {
+  background-color: #4a4a4a;
+}
+
+.token-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  color: #888;
+}
+
+.pair-arrow {
+  font-size: 16px;
+  color: #888;
+}
+
+.fee-tiers {
+  margin-bottom: 24px;
+}
+
+.fee-tiers h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.fee-options {
+  display: flex;
+  gap: 12px;
+}
+
+.fee-option {
+  background: #1a1a1a;
+  border: 2px solid #3a3a3a;
+  border-radius: 12px;
+  padding: 12px;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fee-option.active {
+  border-color: #007bff;
+  background: #1a2332;
+}
+
+.fee-option:hover {
+  border-color: #007bff;
+}
+
+.fee-rate {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.fee-select {
+  font-size: 12px;
+  color: #888;
+}
+
+.best-fee {
+  color: #007bff;
+  font-weight: 500;
+}
+
+.price-range {
+  margin-bottom: 24px;
+}
+
+.range-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.range-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.range-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.range-tab {
+  background: #3a3a3a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.range-tab.active {
+  background: #007bff;
+}
+
+.range-tab:hover {
+  background: #4a4a4a;
+}
+
+.range-tab.active:hover {
+  background: #0056b3;
+}
+
+.price-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.price-input {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.price-input label {
+  display: block;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.price-input input {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  outline: none;
+  margin-bottom: 4px;
+}
+
+.price-input input::placeholder {
+  color: #555;
+}
+
+.price-label {
+  font-size: 12px;
+  color: #888;
+}
+
+.current-price {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.current-price h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+}
+
+.price-value {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.deposit-amounts {
+  margin-bottom: 24px;
+}
+
+.deposit-amounts h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.amount-input {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.amount-input input {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: 60%;
+  outline: none;
+}
+
+.amount-input input::placeholder {
+  color: #555;
+}
+
+.token-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.balance {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  font-size: 12px;
+  color: #888;
+}
+
+.add-liquidity-button {
+  width: 100%;
+  background: #666;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: not-allowed;
+  transition: background-color 0.2s;
+}
+
+.add-liquidity-button:not(:disabled) {
+  background: #007bff;
+  cursor: pointer;
+}
+
+.add-liquidity-button:not(:disabled):hover {
+  background: #0056b3;
+}

@@ -1,0 +1,49 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Current File",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--loader", "ts-node/esm", "${relativeFile}"],
+      "runtimeVersion": "22"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Tests (Current File)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test:debug:nospec", "--", "--spec", "${relativeFile}"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "runtimeVersion": "22"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug CLI Swap Example",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "cli",
+        "--",
+        "swap",
+        "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42",
+        "GALA|Unit|none|none",
+        "SILK|Unit|none|none",
+        "10000",
+        "exactIn",
+        "1.5",
+        "30"
+      ],
+      "cwd": "${workspaceFolder}/examples/cli",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "runtimeVersion": "22"
+    }
+  ]
+}

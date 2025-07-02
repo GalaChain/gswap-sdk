@@ -1,0 +1,12 @@
+src
+examples
+docs
+.env
+.husky
+.vscode
+.gitignore
+.nvmrc
+.prettierrc.json
+eslint.config.mjs
+tsconfig.json
+tsup.config.ts
