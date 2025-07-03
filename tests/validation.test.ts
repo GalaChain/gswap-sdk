@@ -325,7 +325,7 @@ describe('Validation Utilities', () => {
       );
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(() => validateWalletAddress(undefined as any)).to.throw(
-        'Invalid wallet address: must be a non-empty string',
+        'Invalid wallet address: No wallet address provided',
       );
     });
 
