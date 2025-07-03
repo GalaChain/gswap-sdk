@@ -56,7 +56,7 @@ Get a quote for receiving a specific output amount.
 **Syntax:**
 
 ```bash
-npm run cli -- quoteExactOutput <tokenIn> <tokenOut> <fee> <amountOut>
+npm run cli -- quoteExactOutput <tokenIn> <tokenOut> <amountOut> [fee]
 ```
 
 **Parameters:**
@@ -133,7 +133,7 @@ npm run cli -- getPosition <ownerAddress> <token0> <token1> <fee> <tickLower> <t
 **Example:**
 
 ```bash
-npm run cli -- getPosition "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "GALA|Unit|none|none" "SILK|Unit|none|none" 10000 -887220 887220
+npm run cli -- getPosition "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "GALA|Unit|none|none" "SILK|Unit|none|none" 10000 -886800 886800
 ```
 
 #### `getPositionById`
@@ -359,7 +359,7 @@ npm run cli -- getUserPositions "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42"
 
 ```bash
 # Add liquidity with specific tick range
-npm run cli -- addLiquidityByTicks "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "pos1" "GALA|Unit|none|none" "SILK|Unit|none|none" 10000 -887220 887220 100 200 95 190
+npm run cli -- addLiquidityByTicks "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "pos1" "GALA|Unit|none|none" "SILK|Unit|none|none" 10000 -886800 886800 100 200 95 190
 ```
 
 ### 6. Collect Fees

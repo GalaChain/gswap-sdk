@@ -210,10 +210,10 @@ export class Positions {
       owner: args.walletAddress,
       tickLower: args.tickLower,
       tickUpper: args.tickUpper,
-      amount0Desired: ordering?.token0Attributes?.[0],
-      amount1Desired: ordering?.token1Attributes?.[0],
-      amount0Min: ordering?.token0Attributes?.[1],
-      amount1Min: ordering?.token1Attributes?.[1],
+      amount0Desired: ordering?.token0Attributes?.[0]?.toString(),
+      amount1Desired: ordering?.token1Attributes?.[0]?.toString(),
+      amount0Min: ordering?.token0Attributes?.[1]?.toString(),
+      amount1Min: ordering?.token1Attributes?.[1]?.toString(),
       positionId: args.positionId,
     };
 
@@ -584,8 +584,9 @@ export class Positions {
       .div(bnUpperPrice.sqrt().minus(bnSpotPrice.sqrt()));
 
     const yAmount = BigNumber(liquidityAmount).times(bnSpotPrice.sqrt().minus(bnLowerPrice.sqrt()));
+    const untruncated = yAmount.div(BigNumber(10).pow(tokenDecimals - otherTokenDecimals));
 
-    return yAmount.div(BigNumber(10).pow(tokenDecimals - otherTokenDecimals));
+    return BigNumber(untruncated.toFixed(otherTokenDecimals, BigNumber.ROUND_DOWN));
   }
 
   private async sendUserPositionsRequest(
