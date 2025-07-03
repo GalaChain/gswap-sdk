@@ -82,5 +82,8 @@
     "bignumber.js": "^9.3.0",
     "debug": "^4.4.1",
     "socket.io-client": "^4.8.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
