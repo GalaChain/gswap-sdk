@@ -71,11 +71,11 @@ export class GSwap {
    * ```typescript
    * // Execute an exact input swap: sell 100 GALA for USDC
    * const result = await gSwap.swaps.swap(
-   *   'eth|123...abc',
    *   'GALA|Unit|none|none',
    *   'GUSDC|Unit|none|none',
    *   500,
-   *   { exactIn: '100', amountOutMinimum: '45' }
+   *   { exactIn: '100', amountOutMinimum: '45' },
+   *   'eth|123...abc', // your wallet address
    * );
    * ```
    */
@@ -126,17 +126,19 @@ export class GSwap {
    * @param options.dexBackendBaseUrl - Base URL for the DEX backend API (for user assets and other data).
    * @param options.httpRequestor - Custom HTTP requestor to use for API calls. Defaults to the global `fetch` function.
    * @param options.transactionWaitTimeoutMs - Timeout in milliseconds for waiting for transactions to complete. Defaults to 300,000 milliseconds (five minutes).
+   * @param options.walletAddress - Optional default wallet address for operations that require a wallet address (e.x. swapping). If not provided, you must specify the wallet address in each method call.
    */
   constructor(options?: {
-    signer?: GalaChainSigner;
-    gatewayBaseUrl?: string;
-    dexContractBasePath?: string;
-    tokenContractBasePath?: string;
-    bundlerBaseUrl?: string;
-    bundlingAPIBasePath?: string;
-    dexBackendBaseUrl?: string;
-    transactionWaitTimeoutMs?: number;
-    httpRequestor?: HttpRequestor;
+    signer?: GalaChainSigner | undefined;
+    gatewayBaseUrl?: string | undefined;
+    dexContractBasePath?: string | undefined;
+    tokenContractBasePath?: string | undefined;
+    bundlerBaseUrl?: string | undefined;
+    bundlingAPIBasePath?: string | undefined;
+    dexBackendBaseUrl?: string | undefined;
+    transactionWaitTimeoutMs?: number | undefined;
+    walletAddress?: string | undefined;
+    httpRequestor?: HttpRequestor | undefined;
   }) {
     this.gatewayBaseUrl =
       options?.gatewayBaseUrl?.replace(/\/$/, '') ??
@@ -170,9 +172,10 @@ export class GSwap {
       this.bundler,
       this.pools,
       this.httpClient,
+      { walletAddress: options?.walletAddress },
     );
 
-    this.swaps = new Swaps(this.bundler);
+    this.swaps = new Swaps(this.bundler, { walletAddress: options?.walletAddress });
 
     this.assets = new Assets(this.dexBackendBaseUrl, this.httpClient);
   }

@@ -83,7 +83,6 @@ const numTrades = 10;
 
 for (let i = 0; i < numTrades; i++) {
   const pendingTx = await gSwap.swaps.swap(
-    walletAddress,
     'GALA|Unit|none|none',
     'GUSDC|Unit|none|none',
     FEE_TIER.PERCENT_01_00,
@@ -91,6 +90,7 @@ for (let i = 0; i < numTrades; i++) {
       exactIn: tradeSize,
       amountOutMinimum: calculateMinimum(tradeSize),
     },
+    walletAddress,
   );
 
   await pendingTx.wait();

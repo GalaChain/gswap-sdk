@@ -46,7 +46,6 @@ const quote = await gSwap.quoting.quoteExactInput(
 
 // Execute a swap using the fee tier from the quote
 const transaction = await gSwap.swaps.swap(
-  'eth|123...abc', // Your wallet address
   'GUSDC|Unit|none|none', // Token to sell
   'GALA|Unit|none|none', // Token to buy
   quote.feeTier, // Use the fee tier from the quote
@@ -54,6 +53,7 @@ const transaction = await gSwap.swaps.swap(
     exactIn: USDC_SELLING_AMOUNT,
     amountOutMinimum: quote.outTokenAmount.multipliedBy(0.95), // 5% slippage
   },
+  'eth|123...abc', // your wallet address
 );
 ```
 

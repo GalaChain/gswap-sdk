@@ -64,9 +64,15 @@ const SwapPage: React.FC = () => {
       const modeParams =
         ioMode === 'exactInput' ? { exactIn: sellingAmount } : { exactOut: buyingAmount };
 
-      const result = await gSwap!.swaps.swap(walletAddress!, sellingToken, buyingToken, feeTier, {
-        ...modeParams,
-      });
+      const result = await gSwap!.swaps.swap(
+        sellingToken,
+        buyingToken,
+        feeTier,
+        {
+          ...modeParams,
+        },
+        walletAddress!,
+      );
 
       alert('Swap pending: ' + result.data);
     } catch (error) {

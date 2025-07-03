@@ -27,7 +27,7 @@ export class Bundler {
   async signObject<TInputType extends Record<string, unknown>>(
     methodName: string,
     toSign: TInputType,
-  ): Promise<unknown> {
+  ): Promise<TInputType & { signature: string }> {
     if (!this.signer) {
       throw GSwapSDKError.noSignerError();
     }

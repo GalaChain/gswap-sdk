@@ -30,7 +30,6 @@ console.log(`Best rate found on ${quote.feeTier} fee tier pool`);
 
 // Execute a swap using the best fee tier from the quote
 const result = await gSwap.swap(
-  'eth|123...abc', // your wallet address
   'GUSDC|Unit|none|none',
   'GALA|Unit|none|none',
   quote.feeTier,
@@ -38,5 +37,6 @@ const result = await gSwap.swap(
     exactIn: USDC_SELLING_AMOUNT,
     amountOutMinimum: quote.outTokenAmount.multipliedBy(0.95), // 5% slippage
   },
+  'eth|123...abc', // your wallet address
 );
 ```

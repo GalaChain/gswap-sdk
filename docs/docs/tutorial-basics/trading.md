@@ -44,7 +44,6 @@ Use exact input swaps when you want to sell a specific amount of input tokens an
 ```typescript
 async function swapExactInput() {
   const pendingTx = await gSwap.swaps.swap(
-    WALLET_ADDRESS,
     GALA_TOKEN, // Token to sell
     USDC_TOKEN, // Token to buy
     FEE_TIER.PERCENT_01_00, // 1% fee tier
@@ -52,6 +51,7 @@ async function swapExactInput() {
       exactIn: '100', // Sell exactly 100 $GALA
       amountOutMinimum: '45', // Accept minimum 45 USDC (slippage protection)
     },
+    WALLET_ADDRESS,
   );
 
   console.log('Swap transaction submitted:', pendingTx.transactionId);
@@ -74,7 +74,6 @@ async function swapExactOutput() {
 
   // Execute the swap with slippage protection
   const pendingTx = await gSwap.swaps.swap(
-    WALLET_ADDRESS,
     GALA_TOKEN, // Token to sell
     USDC_TOKEN, // Token to buy
     FEE_TIER.PERCENT_01_00, // 1% fee tier
@@ -82,6 +81,7 @@ async function swapExactOutput() {
       exactOut: buyAmount, // Buy exactly 50 USDC
       amountInMaximum: '110', // Maximum 110 $GALA to sell (slippage protection)
     },
+    WALLET_ADDRESS,
   );
 
   console.log('Swap transaction submitted:', pendingTx.transactionId);

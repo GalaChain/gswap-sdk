@@ -222,7 +222,6 @@ const USDC_TOKEN = 'GUSDC|Unit|none|none';
 const WETH_TOKEN = 'GWETH|Unit|none|none';
 
 const result = await gSwap.swap(
-  WALLET_ADDRESS,
   WETH_TOKEN, // Token to sell
   USDC_TOKEN, // Token to buy
   FEE_TIER.PERCENT_00_30, // 0.3% fee tier
@@ -230,6 +229,7 @@ const result = await gSwap.swap(
     exactIn: '1', // Sell exactly 1 WETH
     amountOutMinimum: '3000', // Accept a minimum of 3000 USDC in return (slippage protection)
   },
+  WALLET_ADDRESS,
 );
 ```
 

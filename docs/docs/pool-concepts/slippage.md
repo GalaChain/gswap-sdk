@@ -64,7 +64,6 @@ When selling a specific amount, set `amountOutMinimum` to protect against excess
 
 ```typescript
 const pendingTx = await gSwap.swaps.swap(
-  walletAddress,
   'GALA|Unit|none|none',
   'GUSDC|Unit|none|none',
   FEE_TIER.PERCENT_01_00,
@@ -72,6 +71,7 @@ const pendingTx = await gSwap.swaps.swap(
     exactIn: '100', // Sell exactly 100 $GALA
     amountOutMinimum: '47.5', // We'll accept as little as 47.5 USDC (5% slippage tolerance from our expected 50 USDC)
   },
+  walletAddress,
 );
 ```
 
@@ -87,7 +87,6 @@ When buying a specific amount, set `amountInMaximum` to limit how much you're wi
 
 ```typescript
 const pendingTx = await gSwap.swaps.swap(
-  walletAddress,
   'GALA|Unit|none|none',
   'GUSDC|Unit|none|none',
   FEE_TIER.PERCENT_01_00,
@@ -95,6 +94,7 @@ const pendingTx = await gSwap.swaps.swap(
     exactOut: '50', // Buy exactly 50 USDC
     amountInMaximum: '105', // Pay maximum 105 $GALA (5% slippage tolerance compared to our expected 100 $GALA)
   },
+  walletAddress,
 );
 ```
 
@@ -141,7 +141,6 @@ const amountOutMinimum = quote.outTokenAmount.multipliedBy(1 - slippageTolerance
 
 // Execute with slippage protection
 const pendingTx = await gSwap.swaps.swap(
-  walletAddress,
   'GALA|Unit|none|none',
   'GUSDC|Unit|none|none',
   quote.feeTier,
@@ -149,6 +148,7 @@ const pendingTx = await gSwap.swaps.swap(
     exactIn: '100',
     amountOutMinimum,
   },
+  walletAddress,
 );
 ```
 

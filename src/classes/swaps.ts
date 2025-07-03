@@ -13,7 +13,12 @@ const MAX_SQRT_PRICE_LIMIT = '18446050999999999999';
  * Service for handling token swap operations.
  */
 export class Swaps {
-  constructor(private readonly bundlerService: Bundler) {}
+  constructor(
+    private readonly bundlerService: Bundler,
+    private readonly options?: {
+      walletAddress?: string | undefined;
+    },
+  ) {}
 
   /**
    * Executes a token swap transaction.
@@ -31,17 +36,16 @@ export class Swaps {
    * ```typescript
    * // Exact input swap: sell 100 GALA for USDC
    * const result = await swapsService.swap(
-   *   'eth|123...abc',
    *   'GALA|Unit|none|none',
    *   'GUSDC|Unit|none|none',
    *   500,
-   *   { exactIn: '100', amountOutMinimum: '45' }
+   *   { exactIn: '100', amountOutMinimum: '45' },
+   *   'eth|123...abc', // your wallet address
    * );
    * console.log('Swap successful:', result);
    * ```
    */
   async swap(
-    walletAddress: string,
     tokenIn: GalaChainTokenClassKey | string,
     tokenOut: GalaChainTokenClassKey | string,
     fee: number,
@@ -54,7 +58,10 @@ export class Swaps {
           exactOut: NumericAmount;
           amountInMaximum?: NumericAmount;
         },
+    walletAddress?: string,
   ) {
+    walletAddress = walletAddress ?? this.options?.walletAddress;
+
     validateWalletAddress(walletAddress);
     validateFee(fee);
 

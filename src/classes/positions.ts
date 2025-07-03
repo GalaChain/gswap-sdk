@@ -31,9 +31,12 @@ export class Positions {
     private readonly dexContractBasePath: string,
     bundlerService: Bundler,
     poolService: Pools,
-    httpClient?: HttpClient,
+    httpClient: HttpClient,
+    private readonly options?: {
+      walletAddress?: string | undefined; // Optional default wallet address for operations
+    },
   ) {
-    this.httpClient = httpClient ?? new HttpClient();
+    this.httpClient = httpClient;
     this.bundlerService = bundlerService;
     this.poolService = poolService;
   }
@@ -167,7 +170,7 @@ export class Positions {
    * ```
    */
   async addLiquidityByTicks(args: {
-    walletAddress: string;
+    walletAddress?: string;
     positionId: string;
     token0: GalaChainTokenClassKey | string;
     token1: GalaChainTokenClassKey | string;
@@ -179,7 +182,9 @@ export class Positions {
     amount0Min: NumericAmount;
     amount1Min: NumericAmount;
   }) {
-    validateWalletAddress(args.walletAddress);
+    const walletAddress = args.walletAddress ?? this.options?.walletAddress;
+
+    validateWalletAddress(walletAddress);
     validateFee(args.fee);
     validateTickRange(args.tickLower, args.tickUpper);
     validateNumericAmount(args.amount0Desired, 'amount0Desired');
@@ -270,7 +275,7 @@ export class Positions {
    * ```
    */
   async addLiquidityByPrice(args: {
-    walletAddress: string;
+    walletAddress?: string;
     positionId: string;
     token0: GalaChainTokenClassKey | string;
     token1: GalaChainTokenClassKey | string;
@@ -283,7 +288,9 @@ export class Positions {
     amount0Min: NumericAmount;
     amount1Min: NumericAmount;
   }) {
-    validateWalletAddress(args.walletAddress);
+    const walletAddress = args.walletAddress ?? this.options?.walletAddress;
+
+    validateWalletAddress(walletAddress);
     validateFee(args.fee);
     validateTickSpacing(args.tickSpacing);
     validateNumericAmount(args.minPrice, 'minPrice', true);
@@ -383,7 +390,7 @@ export class Positions {
    * ```
    */
   async removeLiquidity(args: {
-    walletAddress: string;
+    walletAddress?: string;
     positionId: string;
     token0: GalaChainTokenClassKey | string;
     token1: GalaChainTokenClassKey | string;
@@ -394,7 +401,9 @@ export class Positions {
     amount0Min?: NumericAmount;
     amount1Min?: NumericAmount;
   }) {
-    validateWalletAddress(args.walletAddress);
+    const walletAddress = args.walletAddress ?? this.options?.walletAddress;
+
+    validateWalletAddress(walletAddress);
     validateFee(args.fee);
     validateTickRange(args.tickLower, args.tickUpper);
     validateNumericAmount(args.amount, 'amount');
@@ -482,7 +491,7 @@ export class Positions {
    * ```
    */
   async collectPositionFees(args: {
-    walletAddress: string;
+    walletAddress?: string;
     positionId: string;
     token0: GalaChainTokenClassKey | string;
     token1: GalaChainTokenClassKey | string;
@@ -492,7 +501,9 @@ export class Positions {
     amount0Requested: NumericAmount;
     amount1Requested: NumericAmount;
   }) {
-    validateWalletAddress(args.walletAddress);
+    const walletAddress = args.walletAddress ?? this.options?.walletAddress;
+
+    validateWalletAddress(walletAddress);
     validateFee(args.fee);
     validateTickRange(args.tickLower, args.tickUpper);
     validateNumericAmount(args.amount0Requested, 'amount0Requested', true);

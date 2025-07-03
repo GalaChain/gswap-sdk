@@ -161,7 +161,14 @@ export function validateTickSpacing(tickSpacing: number): void {
   }
 }
 
-export function validateWalletAddress(address: string): void {
+export function validateWalletAddress(address?: string): asserts address is string {
+  if (address === undefined) {
+    throw new GSwapSDKError('No wallet address provided', 'VALIDATION_ERROR', {
+      type: 'MISSING_WALLET_ADDRESS',
+      hint: 'Either provide a wallet address to the function you are calling, or set one when instantiating GSwapSDK',
+    });
+  }
+
   if (!address || typeof address !== 'string' || address.trim().length === 0) {
     throw new GSwapSDKError(
       'Invalid wallet address: must be a non-empty string',

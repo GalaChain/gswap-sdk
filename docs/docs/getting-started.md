@@ -38,7 +38,6 @@ console.log(
 
 // Example: Execute a swap using the fee tier from the quote
 const transaction = await gSwap.swaps.swap(
-  'eth|123...abc', // Your wallet address
   'GALA|Unit|none|none', // Token to sell
   'GUSDC|Unit|none|none', // Token to buy
   quote.feeTier, // Use the fee tier from the quote
@@ -46,6 +45,7 @@ const transaction = await gSwap.swaps.swap(
     exactIn: '100', // Sell exactly 100 $GALA
     amountOutMinimum: quote.outTokenAmount.multipliedBy(0.98), // Accept at least 98% of the quoted amount (slippage protection)
   },
+  'eth|123...abc', // your wallet address
 );
 
 console.log('Swap transaction initiated:', transaction);
@@ -112,7 +112,6 @@ Here's a complete HTML page that demonstrates wallet connection and token swappi
 
           // Execute swap
           const result = await gSwap.swaps.swap(
-            walletAddress,
             'GALA|Unit|none|none',
             'GUSDC|Unit|none|none',
             500,
@@ -120,6 +119,7 @@ Here's a complete HTML page that demonstrates wallet connection and token swappi
               exactIn: '100',
               amountOutMinimum: '45',
             },
+            walletAddress,
           );
 
           statusEl.textContent = `Swap successful! Transaction: ${result.txId || 'pending'}`;

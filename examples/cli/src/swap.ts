@@ -39,7 +39,7 @@ export async function swapTokens(
   await GSwap.events.connectEventSocket();
 
   console.log('Submitting swap transaction...');
-  const pendingTx = await gSwap.swaps.swap(walletAddress, tokenIn, tokenOut, fee, amount);
+  const pendingTx = await gSwap.swaps.swap(tokenIn, tokenOut, fee, amount, walletAddress);
 
   console.log(`Transaction submitted with ID: ${pendingTx.transactionId}`);
   console.log('Waiting for transaction to complete...');
