@@ -1,9 +1,8 @@
 # gSwap SDK
 
-[!WARNING]
-gSwap and the gSwap SDK are pre-release and are undergoing testing. It is strongly recommended to not use this package until this notice is removed.
-
 A TypeScript SDK for interacting with the gSwap decentralized exchange on GalaChain.
+
+⚠️ Note that documented APIs for gSwap are undergoing finalization. As a result, this version of the SDK may be deprecated in the near future. Please be prepared to upgrade to a newer version when available.
 
 ## Example SDK Usage
 

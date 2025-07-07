@@ -156,7 +156,7 @@ npm run cli -- getPositionById "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "p
 
 #### `addLiquidity`
 
-Add liquidity to an existing position (simplified). Specify only token0 amount. token1 amount will be automatically determined by the current pool price. The command waits for transaction completion.
+Add liquidity to an existing position (simplified). Specify only token0 amount. token1 amount will be automatically determined by the current pool condition.
 
 **Syntax:**
 
@@ -172,7 +172,7 @@ npm run cli -- addLiquidity "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "posi
 
 #### `addLiquidityByTicks`
 
-Add liquidity to a position with specific tick range. The command waits for transaction completion.
+Add liquidity to a position with specific tick range.
 
 **Syntax:**
 
@@ -188,7 +188,7 @@ npm run cli -- addLiquidityByTicks "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42
 
 #### `addLiquidityByPrice`
 
-Add liquidity to a position with specific price range. The command waits for transaction completion.
+Add liquidity to a position with specific price range.
 
 **Syntax:**
 
@@ -204,12 +204,12 @@ npm run cli -- addLiquidityByPrice "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42
 
 #### `removeLiquidity`
 
-Remove all liquidity from a position. The command waits for transaction completion.
+Remove liquidity from a position. The `portion` parameter specifies the fraction of liquidity to remove (for example `0.5` for 50%).
 
 **Syntax:**
 
 ```bash
-npm run cli -- removeLiquidity <walletAddress> <positionId>
+npm run cli -- removeLiquidity <walletAddress> <positionId> <portion>
 ```
 
 **Example:**
@@ -220,7 +220,7 @@ npm run cli -- removeLiquidity "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "p
 
 #### `collectPositionFees`
 
-Collect accumulated fees from a position. The command waits for transaction completion.
+Collect accumulated fees from a position.
 
 **Syntax:**
 

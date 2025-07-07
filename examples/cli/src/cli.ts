@@ -17,7 +17,7 @@ import { getUserAssets } from './get_user_assets.js';
 import { getUserPositions } from './get_user_positions.js';
 import { quoteExactInput } from './quote_exact_input.js';
 import { quoteExactOutput } from './quote_exact_output.js';
-import { removeAllLiquidity } from './remove_all_liquidity.js';
+import { removeLiquidity } from './remove_all_liquidity.js';
 import { swapTokens } from './swap.js';
 
 // For functions that need calculation utilities, we still need a GSwap instance
@@ -242,10 +242,16 @@ async function main() {
         break;
 
       case 'removeLiquidity':
-        if (functionArgs.length !== 2) {
-          throw new Error('removeLiquidity requires 2 arguments: <walletAddress> <positionId>');
+        if (functionArgs.length !== 3) {
+          throw new Error(
+            'removeLiquidity requires 3 arguments: <walletAddress> <positionId> <portion>',
+          );
         }
-        result = await removeAllLiquidity(functionArgs[0]!, functionArgs[1]!);
+        result = await removeLiquidity(
+          functionArgs[0]!,
+          functionArgs[1]!,
+          Number(functionArgs[2]!),
+        );
         break;
 
       case 'collectPositionFees':

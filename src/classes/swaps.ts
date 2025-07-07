@@ -1,8 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { NumericAmount } from '../types/amounts.js';
 import { GalaChainTokenClassKey } from '../types/token.js';
-import { parseTokenClassKey, stringifyTokenClassKey } from '../utils/token.js';
-import { getTokenOrdering } from '../utils/token_ordering.js';
+import { getTokenOrdering, parseTokenClassKey, stringifyTokenClassKey } from '../utils/token.js';
 import { validateFee, validateNumericAmount, validateWalletAddress } from '../utils/validation.js';
 import { Bundler } from './bundler.js';
 
@@ -82,21 +81,21 @@ export class Swaps {
 
     const rawAmount =
       'exactIn' in amount
-        ? amount.exactIn.toString()
-        : BigNumber(amount.exactOut).multipliedBy(-1).toString();
+        ? BigNumber(amount.exactIn).toFixed()
+        : BigNumber(amount.exactOut).multipliedBy(-1).toFixed();
     const rawAmountOutMinimum =
       'exactIn' in amount
         ? amount.amountOutMinimum?.toString()
-          ? BigNumber(amount.amountOutMinimum).multipliedBy(-1).toString()
+          ? BigNumber(amount.amountOutMinimum).multipliedBy(-1).toFixed()
           : undefined
         : BigNumber(amount.exactOut ?? 0)
             .multipliedBy(-1)
-            .toString();
+            .toFixed();
     const rawAmountInMaximum =
       'exactIn' in amount
-        ? amount.exactIn.toString()
+        ? BigNumber(amount.exactIn).toFixed()
         : amount.amountInMaximum
-          ? amount.amountInMaximum.toString()
+          ? BigNumber(amount.amountInMaximum).toFixed()
           : undefined;
 
     const toSign = {

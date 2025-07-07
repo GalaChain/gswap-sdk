@@ -7,8 +7,7 @@ import type {
 import { FEE_TIER } from '../types/fees.js';
 import type { GetQuoteResult } from '../types/sdk_results.js';
 import type { GalaChainTokenClassKey } from '../types/token.js';
-import { parseTokenClassKey } from '../utils/token.js';
-import { getTokenOrdering } from '../utils/token_ordering.js';
+import { getTokenOrdering, parseTokenClassKey } from '../utils/token.js';
 import { validateNumericAmount } from '../utils/validation.js';
 import { GSwapSDKError } from './gswap_sdk_error.js';
 import { HttpClient } from './http_client.js';
@@ -148,8 +147,8 @@ export class Quoting {
 
     // Format amount based on quote type
     const formattedAmount = isExactInput
-      ? amount.toString()
-      : BigNumber(amount).multipliedBy(-1).toString();
+      ? BigNumber(amount).toFixed()
+      : BigNumber(amount).multipliedBy(-1).toFixed();
 
     const response = await this.sendQuoteRequest('/QuoteExactAmount', {
       ...ordering,

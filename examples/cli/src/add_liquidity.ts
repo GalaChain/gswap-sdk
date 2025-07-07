@@ -1,4 +1,4 @@
-import { GSwap, PriceIn, PrivateKeySigner } from '@gala-chain/gswap-sdk';
+import { GSwap, PriceIn, PrivateKeySigner, stringifyTokenClassKey } from '@gala-chain/gswap-sdk';
 import BigNumber from 'bignumber.js';
 import 'dotenv/config';
 import { getPositionById } from './get_position_by_id.js';
@@ -49,6 +49,10 @@ export async function addLiquidityToExistingPosition(
       gSwap.pools.calculatePriceForTicks(position.tickUpper),
       6, // Assuming 6 decimal places for token0 (if it's wrong the difference is pretty negligible)
       6, // Assuming 6 decimal places for token1
+    );
+
+    console.log(
+      `💰 Calculated ${optimalToken1Amount} to add for token1 (${stringifyTokenClassKey(position.token1ClassKey)})`,
     );
 
     console.log('📤 Submitting add liquidity transaction...');

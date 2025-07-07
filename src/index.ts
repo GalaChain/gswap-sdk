@@ -15,5 +15,5 @@ export * from './types/api_responses.js';
 export * from './types/fees.js';
 export * from './types/sdk_results.js';
 export * from './types/token.js';
-export { compareTokens } from './utils/token_ordering.js';
+export * from './utils/token.js';
 export * from './utils/validation.js';
