@@ -21,10 +21,7 @@ import { removeLiquidity } from './remove_all_liquidity.js';
 import { swapTokens } from './swap.js';
 
 // For functions that need calculation utilities, we still need a GSwap instance
-const gSwap = new GSwap({
-  gatewayBaseUrl:
-    'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com',
-});
+const gSwap = new GSwap({});
 
 async function main() {
   const args = process.argv.slice(2);

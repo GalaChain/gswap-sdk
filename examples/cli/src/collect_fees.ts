@@ -13,8 +13,6 @@ export async function collectFeesFromPosition(address: string, positionId: strin
 
   const gSwap = new GSwap({
     signer: new PrivateKeySigner(privateKey!),
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com', // TODO
   });
 
   await GSwap.events.connectEventSocket();

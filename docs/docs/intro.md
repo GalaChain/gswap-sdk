@@ -12,7 +12,7 @@ Welcome to the **gSwap SDK** documentation. This SDK provides a comprehensive Ty
 
 🎯 **[Tutorials](category/tutorial)** - Walk through the major SDK features.
 
-💡 **[Examples Repo](https://gitlab.com/gala-games/defi/dex/sdk/-/tree/dev/examples/cli?ref_type=heads)** - Complete working examples and sample projects (TODO: Link to GitHub when examples repo is published there).
+💡 **[Examples Repo](https://github.com/GalaChain/gswap-sdk/tree/main/examples)** - Complete working examples and sample projects.
 
 ⚖️ **[Uniswap Comparison](/docs/uniswap-comparison)** - For developers familiar with Uniswap.
 
