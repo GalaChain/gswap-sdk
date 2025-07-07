@@ -3,8 +3,7 @@ import { NumericAmount, PriceIn } from '../types/amounts.js';
 import { FEE_TIER } from '../types/fees.js';
 import type { GetPositionResult, GetUserPositionsResult } from '../types/sdk_results.js';
 import type { GalaChainTokenClassKey } from '../types/token.js';
-import { parseTokenClassKey, stringifyTokenClassKey } from '../utils/token.js';
-import { getTokenOrdering } from '../utils/token_ordering.js';
+import { getTokenOrdering, parseTokenClassKey, stringifyTokenClassKey } from '../utils/token.js';
 import {
   validateFee,
   validateNumericAmount,
@@ -210,10 +209,10 @@ export class Positions {
       owner: args.walletAddress,
       tickLower: args.tickLower,
       tickUpper: args.tickUpper,
-      amount0Desired: ordering?.token0Attributes?.[0],
-      amount1Desired: ordering?.token1Attributes?.[0],
-      amount0Min: ordering?.token0Attributes?.[1],
-      amount1Min: ordering?.token1Attributes?.[1],
+      amount0Desired: BigNumber(ordering!.token0Attributes![0]!).toFixed(),
+      amount1Desired: BigNumber(ordering!.token1Attributes![0]!).toFixed(),
+      amount0Min: BigNumber(ordering!.token0Attributes![1]!).toFixed(),
+      amount1Min: BigNumber(ordering!.token1Attributes![1]!).toFixed(),
       positionId: args.positionId,
     };
 
@@ -432,7 +431,7 @@ export class Positions {
       fee: args.fee,
       tickLower: args.tickLower,
       tickUpper: args.tickUpper,
-      amount: args.amount.toString(),
+      amount: BigNumber(args.amount).toFixed(),
       amount0Min: ordering?.token0Attributes?.[0] || '0',
       amount1Min: ordering?.token1Attributes?.[0] || '0',
       positionId: args.positionId,
@@ -524,8 +523,8 @@ export class Positions {
       token0: ordering.token0,
       token1: ordering.token1,
       fee: args.fee,
-      amount0Requested: ordering?.token0Attributes?.[0],
-      amount1Requested: ordering?.token1Attributes?.[0],
+      amount0Requested: BigNumber(ordering!.token0Attributes![0]!).toFixed(),
+      amount1Requested: BigNumber(ordering!.token1Attributes![0]!).toFixed(),
       tickLower: args.tickLower,
       tickUpper: args.tickUpper,
       positionId: args.positionId,
@@ -584,8 +583,9 @@ export class Positions {
       .div(bnUpperPrice.sqrt().minus(bnSpotPrice.sqrt()));
 
     const yAmount = BigNumber(liquidityAmount).times(bnSpotPrice.sqrt().minus(bnLowerPrice.sqrt()));
+    const untruncated = yAmount.div(BigNumber(10).pow(tokenDecimals - otherTokenDecimals));
 
-    return yAmount.div(BigNumber(10).pow(tokenDecimals - otherTokenDecimals));
+    return BigNumber(untruncated.toFixed(otherTokenDecimals, BigNumber.ROUND_DOWN));
   }
 
   private async sendUserPositionsRequest(

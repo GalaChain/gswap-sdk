@@ -2,8 +2,7 @@ import BigNumber from 'bignumber.js';
 import { Price, PriceIn, SqrtPrice, SqrtPriceIn } from '../types/amounts.js';
 import { GetPoolDataRawResponse, GetPoolDataResponse } from '../types/api_responses.js';
 import { GalaChainTokenClassKey } from '../types/token.js';
-import { parseTokenClassKey } from '../utils/token.js';
-import { getTokenOrdering } from '../utils/token_ordering.js';
+import { getTokenOrdering, parseTokenClassKey } from '../utils/token.js';
 import { validateFee, validateNumericAmount, validateTickSpacing } from '../utils/validation.js';
 import { HttpClient } from './http_client.js';
 

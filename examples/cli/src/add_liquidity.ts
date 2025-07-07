@@ -1,4 +1,4 @@
-import { GSwap, PriceIn, PrivateKeySigner } from '@gala-chain/gswap-sdk';
+import { GSwap, PriceIn, PrivateKeySigner, stringifyTokenClassKey } from '@gala-chain/gswap-sdk';
 import BigNumber from 'bignumber.js';
 import 'dotenv/config';
 import { getPositionById } from './get_position_by_id.js';
@@ -33,14 +33,26 @@ export async function addLiquidityToExistingPosition(
     const poolData = await gSwap.pools.getPoolData(
       position.token0ClassKey,
       position.token1ClassKey,
-      10_000,
+      position.fee,
     );
 
-    // We'll use the current price to determine how much of token1 to add
     const currentPrice = gSwap.pools.calculateSpotPrice(
       position.token0ClassKey,
       position.token1ClassKey,
       poolData.sqrtPrice,
+    );
+
+    const optimalToken1Amount = gSwap.positions.calculateOptimalPositionSize(
+      token0Amount,
+      currentPrice,
+      gSwap.pools.calculatePriceForTicks(position.tickLower),
+      gSwap.pools.calculatePriceForTicks(position.tickUpper),
+      6, // Assuming 6 decimal places for token0 (if it's wrong the difference is pretty negligible)
+      6, // Assuming 6 decimal places for token1
+    );
+
+    console.log(
+      `💰 Calculated ${optimalToken1Amount} to add for token1 (${stringifyTokenClassKey(position.token1ClassKey)})`,
     );
 
     console.log('📤 Submitting add liquidity transaction...');
@@ -53,9 +65,9 @@ export async function addLiquidityToExistingPosition(
       tickLower: position.tickLower,
       tickUpper: position.tickUpper,
       amount0Desired: token0Amount,
-      amount1Desired: currentPrice.multipliedBy(token0Amount),
+      amount1Desired: optimalToken1Amount,
       amount0Min: BigNumber(token0Amount).multipliedBy(0.995),
-      amount1Min: currentPrice.multipliedBy(token0Amount).multipliedBy(0.995),
+      amount1Min: optimalToken1Amount.multipliedBy(0.995),
     });
 
     console.log(`⏳ Waiting for transaction ${pendingTx.transactionId} to complete...`);

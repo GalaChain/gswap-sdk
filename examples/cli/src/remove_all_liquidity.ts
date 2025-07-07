@@ -1,7 +1,7 @@
 import { GSwap, PrivateKeySigner } from '@gala-chain/gswap-sdk';
 import 'dotenv/config';
 
-export async function removeAllLiquidity(walletAddress: string, positionId: string) {
+export async function removeLiquidity(walletAddress: string, positionId: string, portion: number) {
   const privateKey = process.env.GALACHAIN_PRIVATE_KEY;
   if (!privateKey) {
     console.log(
@@ -33,7 +33,7 @@ export async function removeAllLiquidity(walletAddress: string, positionId: stri
       fee: position.fee,
       tickLower: position.tickLower,
       tickUpper: position.tickUpper,
-      amount: position.liquidity,
+      amount: position.liquidity.multipliedBy(portion),
       amount0Min: '0',
       amount1Min: '0',
     });
