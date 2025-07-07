@@ -57,80 +57,42 @@ Never hardcode private keys in your source code! Consider using environment vari
 
 ## Browser Setup
 
+### Installation
+
+```bash
+npm install @gala-chain/gswap-sdk
+```
+
+You will also need `process` and `crypto` polyfills. The details will depend on your build setup, but for example with Vite you can install:
+
+```bash
+npm install vite-plugin-node-polyfills
+```
+
+And then add:
+
+```javascript
+nodePolyfills({ include: ['process', 'crypto'] });
+```
+
+To your `plugins` array in `vite.config.js`.
+
+### Signing
+
 For browser applications, use the `GalaWalletSigner` to integrate with Gala Wallet:
 
-### Complete HTML Example
+```javascript
+import { GSwap, GalaWalletSigner } from '@gala-chain/gswap-sdk';
 
-Here's a complete HTML page that demonstrates wallet connection and token swapping:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>gSwap Demo</title>
-  </head>
-  <body>
-    <h1>gSwap Demo</h1>
-
-    <div id="status"></div>
-
-    <button onclick="connectAndSwap()">Connect Wallet & Swap 100 $GALA for USDC</button>
-
-    <script type="module">
-      import {
-        GSwap,
-        GalaWalletSigner,
-      } from 'https://unpkg.com/@gala-chain/gswap-sdk@1/dist/browser/index.js';
-
-      window.connectAndSwap = connectAndSwap;
-
-      async function connectAndSwap() {
-        const statusEl = document.getElementById('status');
-
-        try {
-          statusEl.textContent = 'Connecting to wallet...';
-
-          if (!window.gala) {
-            throw new Error('Gala Wallet not found. Please install the Gala Wallet extension.');
-          }
-
-          // Connect wallet
-          const accounts = await window.gala.request({
-            method: 'eth_requestAccounts',
-          });
-
-          if (!accounts || accounts.length === 0) {
-            throw new Error('No accounts found');
-          }
-
-          const walletAddress = accounts[0];
-          statusEl.textContent = `Connected: ${walletAddress}. Executing swap...`;
-
-          // Create GSwap instance
-          const walletSigner = new GalaWalletSigner(walletAddress);
-          const gSwap = new GSwap({ signer: walletSigner });
-
-          // Execute swap
-          const result = await gSwap.swaps.swap(
-            'GALA|Unit|none|none',
-            'GUSDC|Unit|none|none',
-            500,
-            {
-              exactIn: '100',
-              amountOutMinimum: '45',
-            },
-            walletAddress,
-          );
-
-          statusEl.textContent = `Swap successful! Transaction: ${result.txId || 'pending'}`;
-        } catch (error) {
-          statusEl.textContent = `Error: ${error.message}`;
-        }
-      }
-    </script>
-  </body>
-</html>
+const walletSigner = new GalaWalletSigner(address);
+const swapInstance = new GSwap({
+  signer: walletSigner,
+});
 ```
+
+### React Example
+
+You can find an example React application [here](https://github.com/GalaChain/gswap-sdk/tree/main/examples/full_dex).
 
 ### Browser Requirements
 
