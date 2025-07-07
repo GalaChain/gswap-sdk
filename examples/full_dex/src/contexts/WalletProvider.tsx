@@ -1,4 +1,4 @@
-import { GalaWalletSigner } from '@gala-chain/gswap-sdk';
+import { GalaWalletSigner, GSwap } from '@gala-chain/gswap-sdk';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { WalletContext } from './WalletContext.tsx';
@@ -62,6 +62,16 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
 
     connectWallet();
   }, []);
+
+  useEffect(() => {
+    async function connect() {
+      GSwap.events.connectEventSocket();
+    }
+
+    connect();
+
+    return () => GSwap.events.disconnectEventSocket();
+  });
 
   const value = {
     connectWallet,

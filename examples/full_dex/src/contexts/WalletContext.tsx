@@ -1,3 +1,4 @@
+import type { GSwap } from '@gala-chain/gswap-sdk';
 import { createContext } from 'react';
 
 interface WalletContextType {

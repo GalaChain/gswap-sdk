@@ -74,7 +74,9 @@ const SwapPage: React.FC = () => {
         walletAddress!,
       );
 
-      alert('Swap pending: ' + result.data);
+      await result.wait();
+
+      alert('Swap complete!');
     } catch (error) {
       console.error('Swap failed', error);
       alert('Swap failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
