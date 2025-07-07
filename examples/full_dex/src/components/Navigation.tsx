@@ -22,12 +22,6 @@ const Navigation: React.FC = () => {
           <Link to="/swap" className={`nav-link ${location.pathname === '/swap' ? 'active' : ''}`}>
             Swap
           </Link>
-          <Link
-            to="/liquidity"
-            className={`nav-link ${location.pathname === '/liquidity' ? 'active' : ''}`}
-          >
-            Liquidity
-          </Link>
         </div>
         <div className="wallet-info">
           {isConnecting ? (
