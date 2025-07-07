@@ -12,8 +12,6 @@ export async function removeLiquidity(walletAddress: string, positionId: string,
 
   const gSwap = new GSwap({
     signer: new PrivateKeySigner(privateKey!),
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com',
   });
 
   await GSwap.events.connectEventSocket();

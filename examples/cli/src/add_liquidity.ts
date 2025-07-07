@@ -18,8 +18,6 @@ export async function addLiquidityToExistingPosition(
 
   const gSwap = new GSwap({
     signer: new PrivateKeySigner(privateKey!),
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com', // TODO
   });
 
   await GSwap.events.connectEventSocket();
@@ -104,8 +102,6 @@ export async function addLiquidityByPrice(
 
   const gSwap = new GSwap({
     signer: new PrivateKeySigner(privateKey!),
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com', // TODO
   });
 
   await GSwap.events.connectEventSocket();
@@ -160,8 +156,6 @@ export async function addLiquidityByTicks(
 
   const gSwap = new GSwap({
     signer: new PrivateKeySigner(privateKey!),
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com', // TODO
   });
 
   await GSwap.events.connectEventSocket();

@@ -141,13 +141,13 @@ export class GSwap {
     httpRequestor?: HttpRequestor | undefined;
   }) {
     this.gatewayBaseUrl =
-      options?.gatewayBaseUrl?.replace(/\/$/, '') ??
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com'; // 'https://gateway-mainnet.galachain.com'; // TODO
+      options?.gatewayBaseUrl?.replace(/\/$/, '') ?? 'https://gateway-mainnet.galachain.com';
     this.dexContractBasePath = options?.dexContractBasePath ?? '/api/asset/dexv3-contract';
     this.tokenContractBasePath = options?.tokenContractBasePath ?? '/api/asset/token-contract';
-    this.bundlerBaseUrl = options?.bundlerBaseUrl ?? 'https://bundle-backend-test1.defi.gala.com'; // TODO
+    this.bundlerBaseUrl = options?.bundlerBaseUrl ?? 'https://bundle-backend-prod1.defi.gala.com';
     this.bundlingAPIBasePath = options?.bundlingAPIBasePath ?? '/bundle';
-    this.dexBackendBaseUrl = options?.dexBackendBaseUrl ?? 'https://dex-backend-dev1.defi.gala.com'; // TODO
+    this.dexBackendBaseUrl =
+      options?.dexBackendBaseUrl ?? 'https://dex-backend-prod1.defi.gala.com';
     this.signer = options?.signer;
     this.transactionWaitTimeoutMs = options?.transactionWaitTimeoutMs ?? 300_000; // 5 minutes
     this.httpRequestor = options?.httpRequestor ?? fetch.bind(globalThis);

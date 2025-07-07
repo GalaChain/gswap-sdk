@@ -30,8 +30,6 @@ export async function swapTokens(
 
   const gSwap = new GSwap({
     signer: new PrivateKeySigner(privateKey!),
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com',
   });
 
   // Connect to socket for transaction status updates

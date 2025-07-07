@@ -11,10 +11,7 @@ export async function quoteExactOutput(
   outAmount: NumericAmount, // The amount of tokenOut you want to receive
   fee?: FEE_TIER, // The fee tier of the pool. If not specified, will use the best available pool.
 ) {
-  const gSwap = new GSwap({
-    gatewayBaseUrl:
-      'https://galachain-gateway-chain-platform-stage-chain-platform-eks.stage.galachain.com', // TODO
-  });
+  const gSwap = new GSwap({});
 
   const quote = await gSwap.quoting.quoteExactOutput(tokenIn, tokenOut, outAmount, fee);
   return quote;
