@@ -63,9 +63,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://gitlab.com/gala-games/defi/dex/sdk',
         },
         blog: {
           showReadingTime: true,
@@ -73,9 +70,6 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://gitlab.com/gala-games/defi/dex/sdk',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -116,7 +110,7 @@ const config: Config = {
           label: 'API Reference',
         },
         {
-          href: 'https://gitlab.com/gala-games/defi/dex/sdk',
+          href: 'https://github.com/GalaChain/gswap-sdk',
           label: 'GitHub',
           position: 'right',
         },
