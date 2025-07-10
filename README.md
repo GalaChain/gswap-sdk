@@ -4,6 +4,10 @@ A TypeScript SDK for interacting with the gSwap decentralized exchange on GalaCh
 
 ⚠️ Note that documented APIs for gSwap are undergoing finalization. As a result, this version of the SDK may be deprecated in the near future. Please be prepared to upgrade to a newer version when available.
 
+## Documentation
+
+Visit [the documentation](https://galachain.github.io/gswap-sdk/docs/intro) for detailed guides and API references.
+
 ## Example SDK Usage
 
 ```bash
