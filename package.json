@@ -1,6 +1,6 @@
 {
   "name": "@gala-chain/gswap-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A source development kit for interacting with GSwap.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
