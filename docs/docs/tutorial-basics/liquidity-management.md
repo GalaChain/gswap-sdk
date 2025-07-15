@@ -205,9 +205,25 @@ console.log('✅ Liquidity added successfully!', result);
 ```typescript
 const position = await gSwap.positions.getPositionById('eth|123...abc', 'position-uuid-123');
 
-// Assuming we want to remove half of our liquidity, divide current liquidity by 2
+// First, estimate what we'll receive from removing half of our liquidity
 const halfLiquidity = position.liquidity.dividedBy(2);
 
+const estimation = await gSwap.positions.estimateRemoveLiquidity({
+  ownerAddress: 'eth|123...abc',
+  positionId: position.positionId,
+  token0: position.token0ClassKey,
+  token1: position.token1ClassKey,
+  fee: position.fee,
+  tickLower: position.tickLower,
+  tickUpper: position.tickUpper,
+  amount: halfLiquidity,
+});
+
+// Set minimum amounts based on estimation with 2% slippage tolerance
+const amount0Min = estimation.amount0.multipliedBy(0.98);
+const amount1Min = estimation.amount1.multipliedBy(0.98);
+
+// Now remove the liquidity
 const pendingTx = await gSwap.positions.removeLiquidity({
   walletAddress: 'eth|123...abc',
   positionId: position.positionId,
@@ -217,14 +233,18 @@ const pendingTx = await gSwap.positions.removeLiquidity({
   tickLower: position.tickLower,
   tickUpper: position.tickUpper,
   amount: halfLiquidity, // Remove 50% of liquidity
-  amount0Min: '0', // Minimum tokens to receive (increase if slippage protection is desired)
-  amount1Min: '0', // Minimum tokens to receive (increase if slippage protection is desired)
+  amount0Min: amount0Min.toString(), // Slippage protection based on estimation
+  amount1Min: amount1Min.toString(), // Slippage protection based on estimation
 });
 
 console.log('Remove liquidity transaction submitted:', pendingTx.transactionId);
 const result = await pendingTx.wait();
 console.log('✅ Liquidity removed successfully!', result);
 ```
+
+:::info Unconditional Removal
+If you want to remove liquidity regardless of how many tokens you will receive, you can skip estimating the proceeds and just set `amount0Min` and `amount1Min` to `0`.
+:::
 
 ## Collecting Fees
 
