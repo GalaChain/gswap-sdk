@@ -186,8 +186,8 @@ export class Positions {
     validateWalletAddress(walletAddress);
     validateFee(args.fee);
     validateTickRange(args.tickLower, args.tickUpper);
-    validateNumericAmount(args.amount0Desired, 'amount0Desired');
-    validateNumericAmount(args.amount1Desired, 'amount1Desired');
+    validateNumericAmount(args.amount0Desired, 'amount0Desired', true);
+    validateNumericAmount(args.amount1Desired, 'amount1Desired', true);
     validateNumericAmount(args.amount0Min, 'amount0Min', true);
     validateNumericAmount(args.amount1Min, 'amount1Min', true);
 
@@ -294,8 +294,8 @@ export class Positions {
     validateTickSpacing(args.tickSpacing);
     validateNumericAmount(args.minPrice, 'minPrice', true);
     validateNumericAmount(args.maxPrice, 'maxPrice');
-    validateNumericAmount(args.amount0Desired, 'amount0Desired');
-    validateNumericAmount(args.amount1Desired, 'amount1Desired');
+    validateNumericAmount(args.amount0Desired, 'amount0Desired', true);
+    validateNumericAmount(args.amount1Desired, 'amount1Desired', true);
     validateNumericAmount(args.amount0Min, 'amount0Min', true);
     validateNumericAmount(args.amount1Min, 'amount1Min', true);
 
