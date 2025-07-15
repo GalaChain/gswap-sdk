@@ -40,8 +40,8 @@ jobs:
         run: |
           npm link
           cd examples/cli
-          npm link @gala-chain/gswap-sdk
           npm i
+          npm link @gala-chain/gswap-sdk
           npm run build
 
   code-quality:

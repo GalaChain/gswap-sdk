@@ -202,6 +202,33 @@ npm run cli -- addLiquidityByPrice <walletAddress> <positionId> <token0> <token1
 npm run cli -- addLiquidityByPrice "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "pos123" "GALA|Unit|none|none" "SILK|Unit|none|none" 10000 200 0.1 10 100 200 95 190
 ```
 
+#### `estimateRemoveLiquidity`
+
+Estimate the token amounts that would be received from removing liquidity from a position.
+
+**Syntax:**
+
+```bash
+npm run cli -- estimateRemoveLiquidity <ownerAddress> <positionId> <token0> <token1> <fee> <tickLower> <tickUpper> <amount>
+```
+
+**Parameters:**
+
+- `ownerAddress`: The wallet address that owns the position
+- `positionId`: The position identifier
+- `token0`: The first token in the pair
+- `token1`: The second token in the pair
+- `fee`: Pool fee tier (500, 3000, or 10000)
+- `tickLower`: The lower tick of the position range
+- `tickUpper`: The upper tick of the position range
+- `amount`: The amount of liquidity to remove
+
+**Example:**
+
+```bash
+npm run cli -- estimateRemoveLiquidity "client|635f048ab243d7eb7f5ba044" "210f8e4dd1bbe1b4af4b977330ee7e4b68bc716f66e39c87a60fff0976ded3ea" "GALA|Unit|none|none" "GUSDT|Unit|none|none" 3000 -41100 -40080 "1491.973332758921980256"
+```
+
 #### `removeLiquidity`
 
 Remove liquidity from a position. The `portion` parameter specifies the fraction of liquidity to remove (for example `0.5` for 50%).
@@ -284,46 +311,13 @@ Wallet addresses should be in the format:
 
 Example: `"eth|0x1234567890123456789012345678901234567890"`
 
-## Transaction Workflow
+## Event listening
 
-The CLI provides a simplified, ethers.js-like experience:
-
-1. **Automatic Socket Management**: Transaction commands automatically connect to the event socket
-2. **Transaction Submission**: Your transaction is submitted to the blockchain
-3. **Automatic Waiting**: The command waits for the transaction to complete
-4. **Result Display**: Final transaction results are displayed
-5. **Cleanup**: Socket connections are automatically cleaned up
-
-### Example Transaction Flow
-
-```bash
-npm run cli -- swap "eth|6cd13b1c31B4E489788F61f2dbf854509D608F42" "GALA|Unit|none|none" "SILK|Unit|none|none" 10000 exactIn 100 95
-```
-
-Output:
-
-```
-🔌 Connecting to transaction status socket...
-📤 Submitting swap transaction...
-Transaction submitted with ID: abc123...
-⏳ Waiting for transaction to complete...
-✅ Transaction completed successfully!
-🔌 Socket disconnected
-{
-  "status": "PROCESSED",
-  "data": { ... }
-}
-```
-
-## Manual Event Monitoring
-
-If you would like to monitor transaction events and print then to the console, you can run:
+Many actions (such as swapping) do not complete immediately. When it does complete (or errors), you will be notified by websocket. To listen for websocket events, run:
 
 ```bash
 npm run sockets
 ```
-
-This starts a websocket listener that will show all transaction events.
 
 ## Examples Workflow
 

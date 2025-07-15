@@ -110,6 +110,76 @@ export class Positions {
   }
 
   /**
+   * Estimates the token amounts that would be received from removing liquidity from a position.
+   * @param args - Parameters for estimating liquidity removal.
+   * @param args.ownerAddress - The wallet address that owns the position.
+   * @param args.positionId - The position identifier.
+   * @param args.token0 - The first token in the pair.
+   * @param args.token1 - The second token in the pair.
+   * @param args.fee - The pool fee tier.
+   * @param args.tickLower - The lower tick of the position range.
+   * @param args.tickUpper - The upper tick of the position range.
+   * @param args.amount - The amount of liquidity to remove.
+   * @returns Estimated token amounts that would be received.
+   * @example
+   * ```typescript
+   * const estimation = await gSwap.positions.estimateRemoveLiquidity({
+   *   ownerAddress: 'client|635f048ab243d7eb7f5ba044',
+   *   positionId: '210f8e4dd1bbe1b4af4b977330ee7e4b68bc716f66e39c87a60fff0976ded3ea',
+   *   token0: 'GALA|Unit|none|none',
+   *   token1: 'GUSDT|Unit|none|none',
+   *   fee: 3000,
+   *   tickLower: -41100,
+   *   tickUpper: -40080,
+   *   amount: '1491.973332758921980256'
+   * });
+   * console.log('Estimated tokens:', estimation);
+   * ```
+   */
+  async estimateRemoveLiquidity(args: {
+    ownerAddress: string;
+    positionId: string;
+    token0: GalaChainTokenClassKey | string;
+    token1: GalaChainTokenClassKey | string;
+    fee: number;
+    tickLower: number;
+    tickUpper: number;
+    amount: NumericAmount;
+  }) {
+    validateWalletAddress(args.ownerAddress);
+    validateFee(args.fee);
+    validateTickRange(args.tickLower, args.tickUpper);
+    validateNumericAmount(args.amount, 'amount');
+
+    const token0TokenClassKey = parseTokenClassKey(args.token0);
+    const token1TokenClassKey = parseTokenClassKey(args.token1);
+
+    const ordering = getTokenOrdering(token0TokenClassKey, token1TokenClassKey, false);
+
+    const responseBody = await this.httpClient.sendPostRequest<{
+      Status: number;
+      Data: {
+        amount0: string;
+        amount1: string;
+      };
+    }>(this.gatewayBaseUrl, this.dexContractBasePath, '/GetRemoveLiquidityEstimation', {
+      tickLower: args.tickLower,
+      tickUpper: args.tickUpper,
+      amount: BigNumber(args.amount).toFixed(),
+      token0: ordering.token0,
+      token1: ordering.token1,
+      fee: args.fee,
+      owner: args.ownerAddress,
+      positionId: args.positionId,
+    });
+
+    return {
+      amount0: BigNumber(responseBody.Data.amount0),
+      amount1: BigNumber(responseBody.Data.amount1),
+    };
+  }
+
+  /**
    * Gets detailed information about a liquidity position by its ID.
    * @param ownerAddress - The wallet address that owns the position.
    * @param positionId - The unique identifier of the position.
