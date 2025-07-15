@@ -41,6 +41,9 @@ async function main() {
     console.log('  getPositionById <ownerAddress> <positionId>');
     console.log('  getPoolData <token0> <token1> <fee>');
     console.log(
+      '  estimateRemoveLiquidity <ownerAddress> <positionId> <token0> <token1> <fee> <tickLower> <tickUpper> <amount>',
+    );
+    console.log(
       '  addLiquidityByTicks <walletAddress> <positionId> <token0> <token1> <fee> <tickLower> <tickUpper> <amount0Desired> <amount1Desired> <amount0Min> <amount1Min>',
     );
     console.log(
@@ -58,6 +61,9 @@ async function main() {
     console.log('  npm run cli -- getUserAssets "eth|123...abc" 1 20');
     console.log('  npm run cli -- swap "eth|123...abc" GALA SILK 10000 exactIn 1.5');
     console.log('  npm run cli -- swap "eth|123...abc" GALA SILK 10000 exactOut 30 1.5');
+    console.log(
+      '  npm run cli -- estimateRemoveLiquidity "client|123...abc" "position-id" GALA GUSDT 3000 -41100 -40080 "1491.973332758921980256"',
+    );
     process.exit(1);
   }
 
@@ -178,6 +184,24 @@ async function main() {
           throw new Error('getPoolData requires 3 arguments: <inToken> <outToken> <fee>');
         }
         result = await getPoolData(functionArgs[0]!, functionArgs[1]!, parseInt(functionArgs[2]!));
+        break;
+
+      case 'estimateRemoveLiquidity':
+        if (functionArgs.length !== 8) {
+          throw new Error(
+            'estimateRemoveLiquidity requires 8 arguments: <ownerAddress> <positionId> <token0> <token1> <fee> <tickLower> <tickUpper> <amount>',
+          );
+        }
+        result = await gSwap.positions.estimateRemoveLiquidity({
+          ownerAddress: functionArgs[0]!,
+          positionId: functionArgs[1]!,
+          token0: functionArgs[2]!,
+          token1: functionArgs[3]!,
+          fee: parseInt(functionArgs[4]!),
+          tickLower: parseInt(functionArgs[5]!),
+          tickUpper: parseInt(functionArgs[6]!),
+          amount: functionArgs[7]!,
+        });
         break;
 
       case 'addLiquidity':
