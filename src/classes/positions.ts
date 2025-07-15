@@ -585,7 +585,10 @@ export class Positions {
     const yAmount = BigNumber(liquidityAmount).times(bnSpotPrice.sqrt().minus(bnLowerPrice.sqrt()));
     const untruncated = yAmount.div(BigNumber(10).pow(tokenDecimals - otherTokenDecimals));
 
-    return BigNumber(untruncated.toFixed(otherTokenDecimals, BigNumber.ROUND_DOWN));
+    return BigNumber.max(
+      BigNumber(untruncated.toFixed(otherTokenDecimals, BigNumber.ROUND_DOWN)),
+      0,
+    );
   }
 
   private async sendUserPositionsRequest(

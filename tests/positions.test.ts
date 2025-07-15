@@ -137,5 +137,22 @@ describe('Positions', () => {
       expect(mockBundlerRequest.body.amount0Min?.toString()).to.equal('9.5');
       expect(mockBundlerRequest.body.amount1Min?.toString()).to.equal('14');
     });
+
+    for (const [amount, spotPrice, minPrice, maxPrice, decimals1, decimals2, expected] of [
+      [1000, 1, 0.016609256581247782, 0.018392722418891543, 8, 6, 0] as const,
+      [1000, 1, 0, 1.993646755828574, 8, 6, 3427.387349] as const,
+    ]) {
+      it(`should calculate optimal liquidity add correctly (${amount},${spotPrice},${minPrice},${maxPrice},${decimals1},${decimals2})`, () => {
+        const result = positions.calculateOptimalPositionSize(
+          amount,
+          spotPrice,
+          minPrice,
+          maxPrice,
+          decimals1,
+          decimals2,
+        );
+        expect(result.toNumber()).to.equal(expected);
+      });
+    }
   });
 });
