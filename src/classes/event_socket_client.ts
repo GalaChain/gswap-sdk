@@ -1,11 +1,33 @@
 import { EventEmitter } from 'events';
 import { Socket, io } from 'socket.io-client';
 
-export interface BundlerResponse {
-  status: 'PROCESSED' | 'FAILED' | 'PENDING';
-  data?: string;
-  error?: string;
+interface IRawBundlerResponse {
+  status: string;
+  data: Record<string, unknown> & {
+    transactionId: string;
+  };
 }
+
+export type BundlerResponse =
+  | {
+      status: 'FAILED';
+      transactionHash: string;
+      data: {
+        ErrorCode: number;
+        ErrorKey: string;
+        ErrorPayload: Record<string, unknown>;
+        Message: string;
+        transactionId: string;
+      };
+    }
+  | {
+      status: 'PROCESSED';
+      transactionHash: string;
+      data: {
+        Data: Record<string, unknown>;
+        transactionId: string;
+      };
+    };
 
 export interface BundlerRequest {
   data: string; // The transaction ID
@@ -60,8 +82,11 @@ export class EventSocketClient extends TradeEventEmitter {
       // Listen for bundler responses and emit them as events
       this.socket.onAny((eventName: string, ...args: unknown[]) => {
         if (typeof eventName === 'string') {
-          const [responseData] = args as [BundlerResponse];
-          this.emit('transaction', eventName, responseData);
+          const [responseData] = args as [IRawBundlerResponse];
+          this.emit('transaction', eventName, {
+            ...responseData,
+            transactionHash: responseData.data?.transactionId,
+          });
         }
       });
     });

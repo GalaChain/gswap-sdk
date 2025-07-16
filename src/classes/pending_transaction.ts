@@ -14,7 +14,11 @@ export class PendingTransaction {
     public readonly transactionId: string,
     public readonly message: string,
     public readonly error: boolean,
-    private readonly waitDelegate: () => Promise<void>,
+    private readonly waitDelegate: () => Promise<{
+      txId: string;
+      transactionHash: string;
+      Data: Record<string, unknown>;
+    }>,
   ) {}
 
   /**

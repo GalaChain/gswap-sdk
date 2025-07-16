@@ -6,8 +6,12 @@ export class TransactionWaiter {
   private readonly promiseInfoForTxId = new Map<
     string,
     {
-      promise: Promise<void>;
-      resolve: () => void;
+      promise: Promise<{ txId: string; transactionHash: string; Data: Record<string, unknown> }>;
+      resolve: (result: {
+        txId: string;
+        transactionHash: string;
+        Data: Record<string, unknown>;
+      }) => void;
       reject: (error: GSwapSDKError) => void;
       waited: boolean;
       timeoutId: number;
@@ -43,10 +47,18 @@ export class TransactionWaiter {
       return;
     }
 
-    let resolve: () => void;
+    let resolve: (args: {
+      txId: string;
+      transactionHash: string;
+      Data: Record<string, unknown>;
+    }) => void;
     let reject: () => void;
 
-    const promise = new Promise<void>((res, rej) => {
+    const promise = new Promise<{
+      txId: string;
+      transactionHash: string;
+      Data: Record<string, unknown>;
+    }>((res, rej) => {
       resolve = res;
       reject = rej;
     });
@@ -58,7 +70,7 @@ export class TransactionWaiter {
         if (promiseInfo.waited) {
           promiseInfo.reject(GSwapSDKError.transactionWaitTimeoutError(txId));
         } else {
-          promiseInfo.resolve();
+          promiseInfo.resolve({ txId, transactionHash: txId, Data: {} });
         }
 
         this.promiseInfoForTxId.delete(txId);
@@ -90,7 +102,10 @@ export class TransactionWaiter {
     return promise.promise;
   }
 
-  notifySuccess(txId: string): void {
+  notifySuccess(
+    txId: string,
+    data: { transactionId: string; Data: Record<string, unknown> },
+  ): void {
     const promiseInfo = this.promiseInfoForTxId.get(txId);
     if (!promiseInfo) {
       return;
@@ -98,7 +113,12 @@ export class TransactionWaiter {
 
     clearTimeout(promiseInfo.timeoutId);
 
-    promiseInfo.resolve();
+    promiseInfo.resolve({
+      txId,
+      transactionHash: data.transactionId,
+      Data: data.Data,
+    });
+
     this.promiseInfoForTxId.delete(txId);
   }
 
@@ -113,7 +133,7 @@ export class TransactionWaiter {
     if (promiseInfo.waited) {
       promiseInfo.reject(GSwapSDKError.transactionWaitFailedError(txId, detail));
     } else {
-      promiseInfo.resolve();
+      promiseInfo.resolve({ txId, transactionHash: txId, Data: {} });
     }
 
     this.promiseInfoForTxId.delete(txId);

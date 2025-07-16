@@ -37,7 +37,7 @@ export class Events {
       return this.globalSocketClient;
     }
 
-    const url = bundlerBaseUrl ?? 'https://bundle-backend-test1.defi.gala.com';
+    const url = bundlerBaseUrl ?? 'https://bundle-backend-prod1.defi.gala.com';
     this.connectionPromise = (async () => {
       const client = new Events.tradeEventEmitterConstructor(url);
       await client.connect();
@@ -92,11 +92,13 @@ export class Events {
    * @param txId - The transaction ID to wait for.
    * @returns Promise that resolves when the transaction completes.
    */
-  async wait(txId: string): Promise<void> {
+  async wait(
+    txId: string,
+  ): Promise<{ txId: string; transactionHash: string; Data: Record<string, unknown> }> {
     if (!this.eventSocketConnected()) {
       throw GSwapSDKError.socketConnectionRequiredError();
     }
-    await this.globalWaitHelper.wait(txId);
+    return this.globalWaitHelper.wait(txId);
   }
 
   /**
@@ -106,16 +108,11 @@ export class Events {
    */
   private internalHandleSocketMessage(txId: string, response: BundlerResponse): void {
     if (response.status === 'PROCESSED') {
-      this.globalWaitHelper.notifySuccess(txId);
+      this.globalWaitHelper.notifySuccess(txId, response.data);
     } else if (response.status === 'FAILED') {
-      this.globalWaitHelper.notifyFailure(txId, {
-        error: response.error,
-        status: response.status,
-        data: response.data,
-      });
-    } else if (response.status === 'PENDING') {
-      // No action needed for pending status
+      this.globalWaitHelper.notifyFailure(txId, response.data);
     } else {
+      // @ts-expect-error - Property 'status' does not exist on type 'never'.ts(2339)
       debugLog(`Unknown response status for transaction ${txId}:`, response.status);
     }
   }
