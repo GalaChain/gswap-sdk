@@ -88,9 +88,18 @@ export class GSwapSDKError extends Error {
   }
 
   public static transactionWaitFailedError(txId: string, detail: Record<string, unknown>) {
+    const transactionHash =
+      'transactionId' in detail && typeof detail.transactionId === 'string'
+        ? detail.transactionId
+        : undefined;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { transactionId, ...rest } = detail;
+
     return new GSwapSDKError('Transaction wait failed.', 'TRANSACTION_WAIT_FAILED', {
       txId,
-      ...detail,
+      transactionHash,
+      ...rest,
     });
   }
 
