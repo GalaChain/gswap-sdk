@@ -22,16 +22,14 @@ export async function socketExample() {
     console.log(`📨 Transaction ${transactionId} update:`, {
       status: response.status,
       hasData: !!response.data,
-      error: response.error,
+      error: response.data,
     });
 
     if (response.status === 'PROCESSED') {
       console.log('✅ Transaction completed successfully!');
       console.log('📊 Full response:', JSON.stringify(response.data, null, 2));
     } else if (response.status === 'FAILED') {
-      console.error('❌ Transaction failed:', response.error);
-    } else if (response.status === 'PENDING') {
-      console.log('⏳ Transaction still pending...');
+      console.error('❌ Transaction failed:', response.data);
     }
   });
 
