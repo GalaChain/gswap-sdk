@@ -284,6 +284,7 @@ export class Positions {
       amount0Min: BigNumber(ordering!.token0Attributes![1]!).toFixed(),
       amount1Min: BigNumber(ordering!.token1Attributes![1]!).toFixed(),
       positionId: args.positionId,
+      liquidityProvider: args.walletAddress,
     };
 
     const token0StringKey = stringifyTokenClassKey(ordering.token0, '$');
@@ -505,6 +506,7 @@ export class Positions {
       amount0Min: ordering?.token0Attributes?.[0] || '0',
       amount1Min: ordering?.token1Attributes?.[0] || '0',
       positionId: args.positionId,
+      recipient: args.walletAddress,
     };
 
     const token0StringKey = stringifyTokenClassKey(ordering.token0, '$');
@@ -598,6 +600,7 @@ export class Positions {
       tickLower: args.tickLower,
       tickUpper: args.tickUpper,
       positionId: args.positionId,
+      recipient: args.walletAddress,
     };
 
     const token0StringKey = stringifyTokenClassKey(ordering.token0, '$');
