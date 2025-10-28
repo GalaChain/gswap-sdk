@@ -159,11 +159,7 @@ export class Quoting {
       ? BigNumber(amount).toFixed()
       : BigNumber(amount).multipliedBy(-1).toFixed();
 
-    // Instead of calling QEA I want to call GetCompositePool and then use the response to calculate the quote with the
-    // DEX API quoteExactAmount method.
-
-    // This seems ridiculous.
-    // TODO: use native dex types from the dex library
+    // TODO: use native dex types from the dex library throughout the sdk
     let feeType: DexFeePercentageTypes;
     switch (fee) {
       case FEE_TIER.PERCENT_00_05:
