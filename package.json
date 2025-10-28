@@ -1,6 +1,6 @@
 {
   "name": "@gala-chain/gswap-sdk",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A source development kit for interacting with GSwap.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -77,6 +77,7 @@
     "*.ts": "prettier --write"
   },
   "dependencies": {
+    "@gala-chain/dex": "^1.0.26",
     "@gala-chain/api": "^2.3.2",
     "@gala-chain/connect": "^2.3.2",
     "bignumber.js": "^9.3.0",
