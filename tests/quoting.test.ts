@@ -300,11 +300,11 @@ describe('Quoting', () => {
       // Verify that we got a valid result and that all fee tiers were checked
       expect(result.outTokenAmount.toNumber()).to.be.greaterThan(4.4);
       expect(result.outTokenAmount.toNumber()).to.be.lessThan(4.6);
-      expect(
-        [FEE_TIER.PERCENT_00_05, FEE_TIER.PERCENT_00_30, FEE_TIER.PERCENT_01_00].includes(
-          result.feeTier,
-        ),
-      ).to.be.true;
+      expect(result.feeTier).to.be.oneOf([
+        FEE_TIER.PERCENT_00_05,
+        FEE_TIER.PERCENT_00_30,
+        FEE_TIER.PERCENT_01_00,
+      ]);
       expect(callCount).to.equal(3); // Should have made 3 calls for all fee tiers
     });
 
@@ -411,7 +411,7 @@ describe('Quoting', () => {
       expect(result.newPrice).to.have.property('toNumber');
 
       // Price impact should be negative (price decreases when selling GALA for SILK)
-      expect(result.priceImpact.isLessThan(0)).to.be.true;
+      expect(result.priceImpact.toNumber()).to.be.below(0);
       // Price impact should be a small negative value (typically between -0.01 and 0)
       expect(result.priceImpact.toNumber()).to.be.greaterThan(-0.01);
       expect(result.priceImpact.toNumber()).to.be.lessThan(0);
@@ -507,7 +507,7 @@ describe('Quoting', () => {
       expect(result.outTokenAmount.toNumber()).to.be.lessThan(0.31);
       expect(result.feeTier).to.equal(FEE_TIER.PERCENT_00_05);
       // Price impact should be negative when selling SILK for GALA
-      expect(result.priceImpact.isLessThan(0)).to.be.true;
+      expect(result.priceImpact.toNumber()).to.be.below(0);
     });
   });
 
