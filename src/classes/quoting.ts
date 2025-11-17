@@ -154,6 +154,17 @@ export class Quoting {
     const tokenOutClassKey = await createValidDTO<TokenClassKey>(TokenClassKey, tokenOutClass);
     const ordering = getTokenOrdering(tokenInClass, tokenOutClass, false);
 
+    // Create DTOs for ordered tokens (token0 < token1 as required by DEX library)
+    // ordering.token0 and token1 are already parsed GalaChainTokenClassKey objects
+    const token0ClassKey = await createValidDTO<TokenClassKey>(
+      TokenClassKey,
+      ordering.token0 as GalaChainTokenClassKey,
+    );
+    const token1ClassKey = await createValidDTO<TokenClassKey>(
+      TokenClassKey,
+      ordering.token1 as GalaChainTokenClassKey,
+    );
+
     // Format amount based on quote type
     const formattedAmount = isExactInput
       ? BigNumber(amount).toFixed()
@@ -189,9 +200,10 @@ export class Quoting {
     // Convert response data to proper CompositePoolDto with BigNumber conversions
     const compositePool = this.createCompositePoolDtoFromResponse(compositePoolResponse);
 
+    // Use ordered tokens (token0 < token1) as required by DEX library
     const quoteDto = new QuoteExactAmountDto(
-      tokenInClassKey,
-      tokenOutClassKey,
+      token0ClassKey,
+      token1ClassKey,
       feeType,
       BigNumber(formattedAmount),
       zeroForOne,
