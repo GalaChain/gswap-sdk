@@ -18,8 +18,8 @@
     "dist"
   ],
   "scripts": {
-    "test": "TS_NODE_FILES=true mocha --spec 'tests/**/*.test.ts'",
-    "test:debug:nospec": "TS_NODE_FILES=true node -r  ts-node/register node_modules/.bin/mocha --exit --timeout 120000",
+    "test": "mocha --spec tests/**/*.test.ts",
+    "test:debug:nospec": "node -r  ts-node/register node_modules/.bin/mocha --exit --timeout 120000",
     "lint": "eslint src tests examples/cli/src --ext .ts,.js",
     "lint:fix": "eslint src tests examples/cli/src --ext .ts,.js --fix",
     "prepare": "husky",
@@ -79,6 +79,7 @@
   "dependencies": {
     "@gala-chain/api": "^2.3.2",
     "@gala-chain/connect": "^2.3.2",
+    "@gala-chain/dex": "^1.0.26",
     "bignumber.js": "^9.3.0",
     "debug": "^4.4.1",
     "socket.io-client": "^4.8.1"
